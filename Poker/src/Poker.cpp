@@ -5,7 +5,7 @@
 // Copyright   : Your copyright notice
 // Description : Hello World in C++, Ansi-style
 //============================================================================
-
+#include <vector>
 #include <iostream>
 using namespace std;
 
@@ -18,25 +18,7 @@ class Cards{
 	}
 };
 
-class Players{
-	Player(string name){
 
-	}
-
-	string displayName(){
-		//displays the player name
-		return 0;
-	}
-
-	void hand(){
-		//give appropriate number of cards to this player
-	}
-
-	void showHand(){
-		//shows all five cards
-	}
-
-};
 
 class Dealer{
 	Dealer(){
