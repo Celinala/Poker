@@ -6,6 +6,7 @@
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 #include <vector>
+#include <cstdlib>
 #include <iostream>
 using namespace std;
 
@@ -42,9 +43,8 @@ Cards::Cards(Suit suit, Value val){
 
 class Dealer{
 public:
-	private:
-	Cards *deck;
-	int currentCard;
+	Cards Hands[][];
+
 	Dealer(){
 		deck = new Cards[52];//creates a new deck
 			currentCard = 0;
@@ -53,13 +53,25 @@ public:
 
 	void shuffleDeck(){
 		//shuffles deck of cards using rand or srand
+		for ( int i = 0; i < 52; i++){
+			int r = rand() % 52;//generate a random position
+			int temp = deck[i];
+			deck[i]=deck[r];
+			deck[r]=temp;
+		}
 	}
 	void dealCards(){
 		//hands out cards to player 1 at a time
+//		for ( int c = 0; c <n; c++){
+//
+//		}
 	}
 	string winner(){
 		//logic to decide who is the winner
 	}
+private:
+	Cards *deck;
+	int currentCard;
 };
 int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
