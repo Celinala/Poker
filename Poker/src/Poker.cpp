@@ -21,8 +21,14 @@ class Cards{
 
 
 class Dealer{
+public:
+	private:
+	Cards *deck;
+	int currentCard;
 	Dealer(){
-		//assign 52 cards to the deck
+		deck = new Cards[52];//creates a new deck
+			currentCard = 0;
+
 	}
 
 	void shuffleDeck(){
