@@ -1,81 +1,137 @@
 //============================================================================
-// Name        : Poker.cpp
-// Author      : Celina Lazaro, Fernando Estevez
+// Name        : PokerGame.cpp
+// Author      :
 // Version     :
 // Copyright   : Your copyright notice
 // Description : Hello World in C++, Ansi-style
 //============================================================================
-#include <vector>
-#include <cstdlib>
+
 #include <iostream>
+#include <string>
+#include "Deck.h"
+#include "Card.h"
+#include "Hand.h"
+#include "player.h"
+
 using namespace std;
+int playerAmount;
+string response;
+string playerName;
+vector<player> players;
+Deck deck;
+string play = "p";
+string quit = "q";
 
-class Cards{
-public:
-	enum Suit{ HEART, CLUBS, SPADES, DIAMONDS};
-	enum Value{TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK,QUEEN, KING, ACE};
+void specifyPlayers();
+void showHands();
+void printOutcomes();
+bool askToPlay();
+void deal();
+void askForPlayerNames();
+void addPlayers();
 
-	Cards(Suit suit, Value val);
-	Cards();
+int main() {
+	while(askToPlay() == true){
+		srand(time(0));
+		specifyPlayers();
+		addPlayers();
+		askForPlayerNames();
+		deal();
+		showHands();
+		printOutcomes();
+	}
 
-	void setSuit(Suit suit){
-		cardSuit =suit;
-	}
-	Suit getSuit(){
-		return cardSuit;
-	}
-	void setValue(Value val){
-		cardVal = val;
-	}
-	Value getValue(){
-		return cardVal;
-	}
-private:
-	Suit cardSuit;
-	Value cardVal;
-};
-Cards::Cards(Suit suit, Value val){
-	cardSuit = suit;
-	cardVal=val;
 }
-
-
-
-class Dealer{
-public:
-	Cards Hands[][];
-
-	Dealer(){
-		deck = new Cards[52];//creates a new deck
-			currentCard = 0;
-
+/*
+ * Adds the players to the players vector.
+ */
+void addPlayers(){
+	players.clear();
+	for(int i = 0;  i < playerAmount; i++){
+		player newPlayer;
+		players.push_back(newPlayer);
+	}
+}
+/*
+ * Prompts for the amount of players.
+ */
+void specifyPlayers() {
+	cout << "How Many Players are playing?" << endl;
+	cin >> playerAmount;
+	if (cin.fail()) {
+		cin.clear();
+		cin.ignore(1024, '\n');
+		specifyPlayers();
+	} else {
+		cout << "Ok." << endl;
 	}
 
-	void shuffleDeck(){
-		//shuffles deck of cards using rand or srand
-		for ( int i = 0; i < 52; i++){
-			int r = rand() % 52;//generate a random position
-			int temp = deck[i];
-			deck[i]=deck[r];
-			deck[r]=temp;
+}
+/*
+ * Prompts if the player is going to continue playing or to quit.
+ */
+bool askToPlay() {
+	cout << "Do you want to Play or Quit? (p or q)" << endl;
+	cin >> response;
+	if(response == play){
+		return true;
+	}
+	else if(response == quit){
+		return false;
+	}
+		else{
+			askToPlay();
 		}
 	}
-	void dealCards(){
-		//hands out cards to player 1 at a time
-//		for ( int c = 0; c <n; c++){
-//
-//		}
+/*
+ * Deals the cards into the players hands.
+ */
+void deal(){
+	for(int i = 0; i < players.size(); i++){
+		players[i].hand.setHand(deck.deal());
 	}
-	string winner(){
-		//logic to decide who is the winner
+}
+/*
+ * Prompts for the player names and sets them.
+ */
+void askForPlayerNames(){
+	for(int i = 0; i < players.size(); i++){
+		cout<< "Enter Player "<< i <<  " Name: ";
+		cin >> playerName;
+		players[i].setName(playerName);
 	}
-private:
-	Cards *deck;
-	int currentCard;
-};
-int main() {
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-	cout<<"hi celina"<<endl;
+	cout << endl;
 
-	return 0;
+}
+/*
+ * Prints each players hands and results.
+ */
+void showHands() {
+	for(int i = 0; i < players.size(); i++){
+		cout << players[i].getName() << " Has: " << endl;
+		for(int j = 0; j < players[i].hand.getHand().size(); j++){
+			Card curCard = players[i].hand.getHand()[j];
+			cout << curCard.toString() << endl;;
+		}
+		cout << "" <<endl;
+		cout << players[i].getName() << " has " << players[i].hand.stringResult() << endl;
+		cout << "" << endl;
+	}
+
+}
+/*
+ * Prints the Winner.
+ */
+void printOutcomes() {
+	vector<int> results;
+	for(int i = 0; i < players.size(); i++){
+		results.push_back(players[i].hand.returnResult());
+	}
+	sort(results.begin(), results.end());
+	int bestResult = results.back();
+	for(int j = 0; j < players.size(); j++){
+		if(bestResult == players[j].hand.returnResult()){
+			cout << players[j].getName() << " is the Winner!" << endl;
+		}
+	}
 }
