@@ -10,13 +10,33 @@
 using namespace std;
 
 class Cards{
+public:
 	enum Suit{ HEART, CLUBS, SPADES, DIAMONDS};
-	enum value{TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK,QUEEN, KING, ACE};
+	enum Value{TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK,QUEEN, KING, ACE};
 
-	Cards(string value, string cardSuit){
+	Cards(Suit suit, Value val);
+	Cards();
 
+	void setSuit(Suit suit){
+		cardSuit =suit;
 	}
+	Suit getSuit(){
+		return cardSuit;
+	}
+	void setValue(Value val){
+		cardVal = val;
+	}
+	Value getValue(){
+		return cardVal;
+	}
+private:
+	Suit cardSuit;
+	Value cardVal;
 };
+Cards::Cards(Suit suit, Value val){
+	cardSuit = suit;
+	cardVal=val;
+}
 
 
 
