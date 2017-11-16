@@ -1,6 +1,6 @@
 //============================================================================
-// Name        : PokerGame.cpp
-// Author      :
+// Name        : Poker.cpp
+// Author      :Celina and Fernando
 // Version     :
 // Copyright   : Your copyright notice
 // Description : Hello World in C++, Ansi-style

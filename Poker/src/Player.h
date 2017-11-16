@@ -1,8 +1,8 @@
 /*
  * player.h
  *
- *  Created on: Apr 19, 2016
- *      Author: Bizzy
+ *  Created on: November 11, 2017
+ *      Author: Celina and Fernando
  */
 
 #ifndef PLAYER_H_

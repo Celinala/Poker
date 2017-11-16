@@ -1,8 +1,8 @@
 /*
  * Deck.h
  *
- *  Created on: Apr 6, 2016
- *      Author: Bizzy
+ *  Created on: November 11, 2017
+ *      Author: Celina and Fernando
  */
 
 #ifndef DECK_H_

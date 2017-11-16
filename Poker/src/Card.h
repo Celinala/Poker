@@ -1,3 +1,10 @@
+/*
+ * Card.h
+ *
+ *  Created on: November 11, 2017
+ *      Author: Celina and Fernando
+ */
+
 #ifndef CARD_H_
 #define CARD_H_
 #include<string>

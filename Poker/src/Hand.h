@@ -1,8 +1,8 @@
 /*
  * Hand.h
  *
- *  Created on: Apr 16, 2016
- *      Author: Bizzy
+ *  Created on: November 13, 2017
+ *      Author: Celina and Fernando
  */
 
 #ifndef HAND_H_
